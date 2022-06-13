@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <form class="form">
+      <input type="text" id="search" placeholder="Search for a GIF.." />
+    </form>
+    <br />
+
+    <button class="generate-button">More Cats Please!</button>
+    <br />
+    <img src="#" />
+
+    <script>
+      const img = document.querySelector("img");
+      const generateButton = document.querySelector(".generate-button");
+      const form = document.querySelector(".form");
+      const search = document.getElementById("search");
+      fetch(
+        "https://api.giphy.com/v1/gifs/translate?api_key=9EKO4OX14zsckVrLRRgcYqdqKgqGlEf8&s=cats",
+        { mode: "cors" }
+      )
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (response) {
+          img.src = response.data.images.original.url;
+        });
+
+      generateButton.addEventListener("click", (e) => {
+        fetch(
+          "https://api.giphy.com/v1/gifs/translate?api_key=9EKO4OX14zsckVrLRRgcYqdqKgqGlEf8&s=cats",
+          { mode: "cors" }
+        )
+          .then(function (newResponse) {
+            return newResponse.json();
+          })
+          .then(function (newResponse) {
+            img.src = newResponse.data.images.original.url;
+          });
+      });
+
+      form.addEventListener("submit", searchGIF);
+      function searchGIF(e) {
+        let searchValue = search.value;
+        e.preventDefault();
+        fetch(
+          "https://api.giphy.com/v1/gifs/translate?api_key=9EKO4OX14zsckVrLRRgcYqdqKgqGlEf8&s=" +
+            searchValue,
+          { mode: "cors" }
+        )
+          .then(function (searchResponse) {
+            return searchResponse.json();
+          })
+          .then(function (input) {
+            img.src = input.data.images.original.url;
+          })
+          .catch(function (err) {
+            alert("Did not find GIF");
+          });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+button {
+  background-color: rgb(134, 254, 132);
+  width: 10rem;
+  border-radius: 2rem;
+  border-width: 0rem;
+}
+button:focus:hover {
+  background-color: rgb(137, 248, 254);
+  border-width: 0.08rem;
+  border-color: rgb(0, 162, 255);
+}
